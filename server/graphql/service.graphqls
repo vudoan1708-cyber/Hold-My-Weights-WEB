@@ -1,0 +1,90 @@
+"""An ISO-8601 encoded UTC date string."""
+scalar DateTime
+
+"""Node interface"""
+interface Node {
+  id: ID!
+}
+
+"""User"""
+type User {
+  """Google ID"""
+  user_id: String!
+  name: String!
+  email: String!
+  dateOfBirth: DateTime
+}
+
+"""Equipment"""
+type Equipment {
+  name: String!
+  description: String!
+  type: String!
+  dateOfPublish: DateTime
+}
+
+"""Booking Times"""
+type BookingTime {
+  time: String
+}
+
+"""Booking System"""
+type BookingSystem {
+  booked: [Equipment!]!
+  time: [BookingTime!]!
+}
+
+"""Service"""
+type Service implements Node {
+  id: ID!
+  user: User!
+  equipment: BookingSystem!
+  created_at: String!
+}
+
+"""Queries available through this API"""
+type Query {
+  node(
+    """The ID of the object"""
+    id: ID!
+  ): Node
+  """Get All The Services You Have Booked Historically"""
+  getServices: [Service!]!
+  """Get A Particular Service"""
+  getService(id: ID!): Service!
+}
+
+"""Input Payload for Creating a User Object"""
+input UserInput {
+  """Google ID"""
+  user_id: String!
+  name: String!
+  email: String!
+  dateOfBirth: DateTime
+}
+
+"""Input Payload for Creating a Equipment Object"""
+input EquipmentInput {
+  name: String!
+  description: String!
+  type: String!
+  dateOfPublish: DateTime
+}
+
+"""Input Payload for Creating a Booking System Object"""
+input BookingSystemInput {
+  booked: [EquipmentInput!]!
+  time: [String!]!
+}
+
+"""Input payload for Creating a Service"""
+input CreateServiceInput {
+  user: UserInput!
+  equipment: BookingSystemInput!
+  created_at: String!
+}
+
+"""Mutations avialable through this API"""
+type Mutation {
+  createService(input: CreateServiceInput!): Service!
+}
