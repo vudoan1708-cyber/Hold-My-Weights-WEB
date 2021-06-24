@@ -33,12 +33,20 @@ const bookingService = {
         'dateOfPublish': '',
       },
     ],
-    time: [
-      '4:00PM - 4:15PM',
-      '4:15PM - 4:30PM',
-      '4:30PM - 4:45PM',
-      '5:00PM - 5:15PM',
-    ],
+    time: {
+      expected_time: [
+        '4:00PM - 4:15PM',
+        '4:15PM - 4:30PM',
+        '4:30PM - 4:45PM',
+        '5:00PM - 5:15PM',
+      ],
+      finishing_time: [
+        '4:00PM - 4:10PM',
+        '4:12PM - 4:25PM',
+        '4:30PM - 4:40PM',
+        '4:45PM - 4:59PM',
+      ],
+    }
   },
   created_at: '01-01-2022 at 3:51PM',
 };

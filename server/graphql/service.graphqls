@@ -25,7 +25,8 @@ type Equipment {
 
 """Booking Times"""
 type BookingTime {
-  time: String
+  expected_time: [String!]!
+  finishing_time: [String]
 }
 
 """Booking System"""
@@ -71,17 +72,22 @@ input EquipmentInput {
   dateOfPublish: DateTime
 }
 
+"""Input Payload for Booking Times"""
+input BookingTimeInput {
+  expected_time: [String!]!
+  finishing_time: [String]
+}
+
 """Input Payload for Creating a Booking System Object"""
 input BookingSystemInput {
   booked: [EquipmentInput!]!
-  time: [String!]!
+  time: [BookingTimeInput!]!
 }
 
 """Input payload for Creating a Service"""
 input CreateServiceInput {
   user: UserInput!
   equipment: BookingSystemInput!
-  created_at: String!
 }
 
 """Mutations avialable through this API"""

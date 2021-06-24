@@ -2,14 +2,13 @@
 const Resolver = require('./index');
 
 // Array
-const sortArray = require('../../logic/array');
+// const { sortArray } = require('../../logic/array');
 
-// Binary Search Algorithm
-const binarySearch = require('../../logic/algorithm/binarySearch');
+// // Binary Search Algorithm
+// const binarySearch = require('../../logic/algorithm/binarySearch');
 
 // Instantiate The Resolver Class
 const resolver = new Resolver();
-console.log(resolver);
 
 module.exports = resolvers = {
   Query: {
@@ -26,19 +25,18 @@ module.exports = resolvers = {
     },
 
     getService: (_, args) => {
-      console.log(args);
-      // Sort The Array
-      const sortedServices = sortArray(resolver.services)
-      // Perform Binary Search
-      const index = binarySearch(sortedServices, args.id);
-      return sortedServices[index];
+      return resolver.services[args.id - 1].Get();
     }
   },
 
   Mutation: {
-    createService: () => {
-      // Add The Newly Created Service TO The Array Stored in The Resolvers
-      // resolver.services.push();
+    createService: (_, args) => {
+      // Instantiate A New Service Model Through The Service Factory Model
+      const newService = resolver.serviceFactory.NewService(args.input);
+      // Add The Newly Created Service To The Array Stored in The Resolvers
+      resolver.services.push(newService);
+      // Return The Newly Created Service
+      return newService;
     }
   }
 };
