@@ -7,7 +7,7 @@ module.exports = class Resolver {
     this.serviceFactory = new ServiceFactory();
     this.services = [];
   }
-  loadServices() {
+  LoadServices() {
     // Talk To MongoDB to retrieve all service data
 
     // Append To Services Array
