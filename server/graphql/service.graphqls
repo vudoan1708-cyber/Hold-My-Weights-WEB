@@ -107,7 +107,9 @@ type Mutation {
   editUserEmail(id: ID!, value: String!): Service!
   editUserDateOfBirth(id: ID!, value: DateTime!): Service!
 
+  editUserDetail(id: ID!, input: UserInput!): Service!
+
   editEquipment(id: ID!, input: BookingSystemInput!): Service!
 
-  editMultipleFields(id: ID!, options: [String!]!, values: [String!]!): Service!
+  editMultipleFields(id: ID!, options: [String!]!, input: CreateServiceInput!): Service!
 }

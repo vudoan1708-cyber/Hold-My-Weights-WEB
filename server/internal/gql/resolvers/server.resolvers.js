@@ -62,10 +62,33 @@ module.exports = resolvers = {
       return chosenService.Get();
     },
 
+    // Edit The Entire User Info
+    editUserDetail: (_, args) => {
+      const chosenService = resolver.services[args.id - 1];
+      chosenService.EditUserDetail(args);
+      return chosenService.Get();
+    },
+
     // Booked Equipment Info
     editEquipment: (_, args) => {
       const chosenService = resolver.services[args.id - 1];
       chosenService.EditEquipment(args.input.booked, args.input.time);
+      return chosenService.Get();
+    },
+
+    editMultipleFields: (_, args) => {
+      const options = args.options;
+      const inputs = args.input;
+      const chosenService = resolver.services[args.id - 1];
+
+      // Loop Through The Options Array
+      options.forEach((option) => {
+        if (option === 'user') {
+          chosenService.EditMultipleFields(inputs.user, null, null);
+        } else if (option === 'equipment') {
+          chosenService.EditMultipleFields(null, inputs.equipment.booked, inputs.equipment.time);
+        }
+      })
       return chosenService.Get();
     },
   }

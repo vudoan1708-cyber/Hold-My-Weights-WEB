@@ -1,3 +1,5 @@
+const isEmpty = require('../../logic/object');
+
 module.exports = class Service {
   constructor(service_id, user_id, user_name, user_email, dateOfBirth,
               bookedEquipment, bookedTime) {
@@ -37,9 +39,22 @@ module.exports = class Service {
     else this.user.dateOfBirth = 'No Birthday Provided';
   }
 
+  // Edit The Entire User Info
+  EditUserDetail(args) {
+    if (!isEmpty(args)) this.user = args.input;
+    else this.user = this.user;
+  }
+
   // Edit Booked Equipment Info
   EditEquipment(bookedEquipment, bookedTime) {
     this.equipment.booked = bookedEquipment;
     this.equipment.time = bookedTime;
+  }
+
+  // Edit Multiple Fields
+  EditMultipleFields(userDetail, bookedEquipment, bookedTime) {
+    this.user = userDetail !== null ? userDetail : this.user;
+    this.equipment.booked = bookedEquipment !== null ? bookedEquipment : this.equipment.booked;
+    this.equipment.time = bookedTime !== null ? bookedTime : this.equipment.time;
   }
 }
