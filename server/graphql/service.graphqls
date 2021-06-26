@@ -113,3 +113,8 @@ type Mutation {
 
   editMultipleFields(id: ID!, options: [String!]!, input: CreateServiceInput!): Service!
 }
+
+"""Subscriptions avialable through this API"""
+type Subscription {
+  updateServiceAdded: Service!
+}

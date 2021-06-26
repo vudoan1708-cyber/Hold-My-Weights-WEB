@@ -5,7 +5,7 @@ const cors = require('cors');
 const express = require('express');
 
 // GraphQL
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, PubSub, makeExecutableSchema } = require('apollo-server-express');
 const typeDefs = require('./internal/gql/schema/index');
 const resolvers = require('./internal/gql/resolvers/server.resolvers');
 
@@ -27,16 +27,29 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 // HTTP Server
-// const http = require('http');
-// const server = http.createServer(app);
+const http = require('http');
+const httpServer = http.createServer(app);
+
+// GraphQL Subscription PubSub
+const pubsub = new PubSub();
 
 // GraphQL Server
-const server = new ApolloServer({ typeDefs, resolvers  });
+const server = new ApolloServer({
+  debug: true,
+  schema: makeExecutableSchema({
+    resolverValidationOptions: { requireResolversForResolveType: false },
+    typeDefs,
+    resolvers,
+  }),
+  context: ({ req, res }) => ({ req, res, pubsub }),
+});
 server.applyMiddleware({ app });
+server.installSubscriptionHandlers(httpServer);
 
-app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`Starting the server at http://localhost:${port}\n
-  GraphQL Server ready at http://localhost:${port}${server.graphqlPath}`);
+  GraphQL Server ready at http://localhost:${port}${server.graphqlPath}\n
+  GraphQL Subscription ready at ws://localhost:${port}${server.subscriptionsPath}`);
 });
 app.use(express.json({ limit: '1mb' }));
 

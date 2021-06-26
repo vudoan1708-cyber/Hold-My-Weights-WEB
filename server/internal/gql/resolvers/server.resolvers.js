@@ -36,11 +36,13 @@ module.exports = resolvers = {
 
   Mutation: {
     // Add / Create A New Service
-    createService: (_, args) => {
+    createService: (_, args, { pubsub }) => {
       // Instantiate A New Service Model Through The Service Factory Model
       const newService = resolver.serviceFactory.NewService(args.input);
       // Add The Newly Created Service To The Array Stored in The Resolvers
       resolver.services.push(newService);
+      // Publish The Event 'SERVICE_CREATED' to allow live update Using Subscription
+      pubsub.publish('SERVICE_CREATED', { updateServiceAdded: newService });
       // Return The Newly Created Service
       return newService;
     },
@@ -104,6 +106,12 @@ module.exports = resolvers = {
         }
       })
       return chosenService.Get();
+    },
+  },
+
+  Subscription: {
+    updateServiceAdded: {
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('SERVICE_CREATED'),
     },
   }
 };

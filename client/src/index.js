@@ -9,12 +9,50 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  HttpLink,
+  split,
 } from "@apollo/client";
+import { getMainDefinition } from '@apollo/client/utilities';
+// Websocket for GraphQL Subscription
+import { WebSocketLink } from '@apollo/client/link/ws';
 
-// Link for HTTP Requests
+// Check for Production Mode
+const PRODUCTION = process.env.NODE_ENV;
+
+// Split Links
+// HTTP Requests Link
+const httpLink = new HttpLink({
+  uri: PRODUCTION === 'production'
+        ? 'https://localhost:5000/graphql'
+        : 'http://localhost:5000/graphql',
+});
+// Websocket Link
+const wsLink = new WebSocketLink({
+  uri: PRODUCTION === 'production'
+        ? 'wss://localhost:5000/graphql'
+        : 'ws://localhost:5000/graphql',
+  options: {
+    reconnect: true,
+  },
+});
+
+// Use Different Links Conditionally
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
+
+// Apollo Client which talks to GraphQL Server
 const client = new ApolloClient({
   connectToDevTools: true,
-  uri: 'http://localhost:5000/graphql',
+  link: splitLink,
   cache: new InMemoryCache(),
 });
 
