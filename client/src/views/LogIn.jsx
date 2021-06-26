@@ -1,5 +1,5 @@
 // Google Login Handler
-import { LogInHandler } from '@/handlers/google';
+import { LogInHandler } from '@/handlers/OAuth/google';
 
 // SCSS
 import '@/sass/Unique/_Views/_login.scss';

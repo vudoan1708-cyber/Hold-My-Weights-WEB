@@ -19,4 +19,8 @@ module.exports = class ServiceFactory {
                                   booked, time);
     return newService;
   }
+
+  TotalSize() {
+    return this.serviceCnt;
+  }
 }

@@ -1,6 +1,6 @@
-// import useFetch from '../components/Utils/useFetch';
+// import useFetch from '../../components/Utils/useFetch';
 // Utils
-import queryURL from '../components/Utils/queryURL';
+import queryURL from '../../components/Utils/queryURL';
 
 // handling production and development mode
 const PRODUCTION = process.env.NODE_ENV;

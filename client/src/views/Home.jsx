@@ -1,4 +1,4 @@
-import { TOKEN } from '@/handlers/google';
+import { TOKEN } from '@/handlers/OAuth/google';
 
 export default function Home() {
   return (

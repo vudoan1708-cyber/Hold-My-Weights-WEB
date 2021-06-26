@@ -15,7 +15,7 @@ module.exports = class Service {
       booked: bookedEquipment,
       time: bookedTime
     },
-    this.created_at = new Date();
+    this.created_at = new Date().toLocaleString();
   }
 
   GetID() {

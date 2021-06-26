@@ -35,6 +35,7 @@ module.exports = resolvers = {
   },
 
   Mutation: {
+    // Add / Create A New Service
     createService: (_, args) => {
       // Instantiate A New Service Model Through The Service Factory Model
       const newService = resolver.serviceFactory.NewService(args.input);
@@ -42,6 +43,19 @@ module.exports = resolvers = {
       resolver.services.push(newService);
       // Return The Newly Created Service
       return newService;
+    },
+
+    // Delete A Service
+    deleteService: (_, args) => {
+      const serviceID = args.input.id - 1;
+      // Make A Copy of The Service
+      const deletedService = resolver.services[serviceID].Get();
+      // Dereference The Service By Setting it To Null
+      resolver.services[serviceID] = null;
+      // Remove it From The Array
+      resolver.services.splice(serviceID, 1);
+      // Return The Deleted Service
+      return deletedService;
     },
 
     // EDIT SERVICE INFO
