@@ -14,12 +14,11 @@ const cookieParser = require('cookie-parser');
 const fallback = require('express-history-api-fallback');
 const compression = require('compression');
 
-// GraphQL Schema & Routing Component
-// const schemaRouter = require('./routes/graph-model');
-
 // Routing Components
 const loginRouter = require('./routes/login');
 const callbackRouter = require('./routes/callback');
+const googleRouter = require('./routes/google');
+const databaseRouter = require('./routes/database');
 
 const root = path.join(__dirname, './dist');
 const port = process.env.PORT || 5000;
@@ -60,7 +59,8 @@ app.use(cors());
 // Use Routes
 loginRouter(app);
 callbackRouter(app);
-// schemaRouter(app);
+googleRouter(app);
+databaseRouter(app);
 
 // check if the app is running in production
 if (process.env.NODE_ENV === 'production') {

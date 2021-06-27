@@ -11,11 +11,12 @@ module.exports = class ServiceFactory {
     this.serviceCnt += 1;
 
     // Destructure The Passed Argument
-    const { user_id, name, email, dateOfBirth } = args.user;
+    const { user_id, name, email, photo, dateOfBirth } = args.user;
     const { booked, time } = args.equipment;
 
     // Instantiate A New Service
-    const newService = new Service(this.serviceCnt, user_id, name, email, dateOfBirth,
+    const newService = new Service(this.serviceCnt,
+                                  user_id, name, email, photo, dateOfBirth,
                                   booked, time);
     return newService;
   }

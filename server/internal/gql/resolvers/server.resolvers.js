@@ -72,6 +72,11 @@ module.exports = resolvers = {
       chosenService.EditUserEmail(args.value);
       return chosenService.Get();
     },
+    editUserPhoto: (_, args) => {
+      const chosenService = resolver.services[args.id - 1];
+      chosenService.EditUserPhoto(args.value);
+      return chosenService.Get();
+    },
     editUserDateOfBirth: (_, args) => {
       const chosenService = resolver.services[args.id - 1];
       chosenService.EditUserDateOfBirth(args.value);

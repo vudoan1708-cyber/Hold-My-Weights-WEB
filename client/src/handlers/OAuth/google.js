@@ -1,6 +1,6 @@
-// import useFetch from '../../components/Utils/useFetch';
+import useFetch from '@/components/Utils/useFetch';
 // Utils
-import queryURL from '../../components/Utils/queryURL';
+import queryURL from '@/components/Utils/queryURL';
 
 // handling production and development mode
 const PRODUCTION = process.env.NODE_ENV;
@@ -18,15 +18,15 @@ export function LogInHandler() {
 }
 
 // User
-// export async function GetUserProfile() {
-// const URL = (PRODUCTION === 'production')
-//             ? `https://seedlings.herokuapp.com/api/user/detail/?token=${TOKEN}`
-//             : `http://localhost:5000/api/user/detail/?token=${TOKEN}`;
-//   try {
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const response = await useFetch(URL, 'GET', undefined);
-//     return response;
-//   } catch (err) {
-//     return err;
-//   }
-// }
+export async function GetUserProfile() {
+const URL = (PRODUCTION === 'production')
+            ? `https://hmw.herokuapp.com/google/user?token=${TOKEN}`
+            : `http://localhost:5000/google/user?token=${TOKEN}`;
+  try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const response = await useFetch(URL, 'GET', undefined);
+    return response;
+  } catch (err) {
+    return err;
+  }
+}

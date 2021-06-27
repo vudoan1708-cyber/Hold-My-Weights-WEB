@@ -1,13 +1,15 @@
 const isEmpty = require('../../logic/object');
 
 module.exports = class Service {
-  constructor(service_id, user_id, user_name, user_email, dateOfBirth,
+  constructor(service_id,
+              user_id, user_name, user_email, photo, dateOfBirth,
               bookedEquipment, bookedTime) {
     this.id = service_id;
     this.user = {
       user_id,
       name: user_name,
       email: user_email,
+      photo,
       dateOfBirth,
     };
     // An Array of Booked Equipment and Time
@@ -33,6 +35,10 @@ module.exports = class Service {
   EditUserEmail(email) {
     if (email !== '') this.user.email = email;
     else this.user.email = 'No Email Provided';
+  }
+  EditUserPhoto(photo) {
+    if (photo !== '') this.user.photo = photo;
+    else if (photo === '' || photo === '#') this.user.photo = '#';
   }
   EditUserDateOfBirth(dob) {
     if (dob !== '') this.user.dateOfBirth = dob;

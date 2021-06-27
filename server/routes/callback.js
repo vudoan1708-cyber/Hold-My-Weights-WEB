@@ -1,6 +1,6 @@
 const querystring = require('querystring');
 
-const useFetch = require('../internal/logic/useFetch');
+const { useFetch } = require('../internal/logic/useFetch');
 
 module.exports = (app) => {
   // Env Variables

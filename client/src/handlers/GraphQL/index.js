@@ -1,11 +1,13 @@
 import {
   useQuery,
   useMutation,
+  useSubscription,
 } from "@apollo/client";
 
 // GraphQL Schema Definitions
 import { GET_SERVICES, GET_SERVICE } from '@/handlers/GraphQL/Queries/schema';
 import { CREATE_SERVICE, DELETE_SERVICE } from '@/handlers/GraphQL/Mutations/schema';
+import { UPDATE_ADDED_SERVICE } from '@/handlers/GraphQL/Subscriptions/schema';
 
 // Queries
 export function GetServices() {
@@ -33,7 +35,12 @@ export function InvokeDeleteService() {
 export function ExecuteCreateService(createService, input) {
   createService({ variables: { input: input } });
 }
-
 export function ExecuteDeleteService(deleteService, input) {
   deleteService({ variables: { input: input } });
+}
+
+// Subscriptions
+export function UpdateService() {
+  const { loading, data } = useSubscription(UPDATE_ADDED_SERVICE);
+  return { loading, data };
 }
