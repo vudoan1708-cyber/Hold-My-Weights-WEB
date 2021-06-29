@@ -1,24 +1,40 @@
-module.exports.User = {
-  user_id: String,
-  name: String,
-  email: String,
-  photo: String,
+const mongoose = require('mongoose');
+
+// Schema
+const { Schema, model } = mongoose;
+
+const requiredString = {
+  type: String,
+  required: true,
+}
+
+const User = {
+  user_id: requiredString,
+  name: requiredString,
+  email: requiredString,
+  photo: requiredString,
   dateOfBirth: Date,
 }
 
-module.exports.Equipment = {
+const Equipment = {
   
 }
 
-module.exports.serviceSchema = {
+const Service = {
   id: String || Int16Array,
   user: {
-    type: Map,
-    of: this.User,
+    type: User,
+    required: true,
   },
   equipment: {
-    type: Map,
-    of: this.Equipment,
+    type: Equipment,
+    required: true,
   },
   created_at: Date,
 }
+
+const serviceSchema = Schema({
+  Service
+});
+
+module.exports = model('SERVICE', serviceSchema);

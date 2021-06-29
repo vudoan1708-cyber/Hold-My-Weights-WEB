@@ -10,8 +10,10 @@ module.exports = async function createConnection() {
       useFindAndModify: false,
       useCreateIndex: true
     });
-    console.log(`Connect to MongoDB Database successfully`);
-    return database;
+
+    db.on('error', console.error.bind(console, 'connection error:'));
+    console.log(`Connect to MongoDB Database via Mongoose successfully`);
+    return db;
   } catch (err) {
     console.log(`Err ${err}`);
     return err;

@@ -1,0 +1,12 @@
+@import '@/sass/_variables';
+
+#Home_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: $dim_black;
+  margin: 10px 0;
+  overflow: hidden;
+}

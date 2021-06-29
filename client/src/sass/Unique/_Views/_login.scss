@@ -1,3 +1,8 @@
+@import '@/sass/_variables';
+
+@import '@/sass/Mixin/_position';
+@import '@/sass/Mixin/_transition';
+
 #Login_wrapper {
   display: flex;
   flex-direction: column;
@@ -5,4 +10,41 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
+  background-color: $theme;
+  color: white;
+
+  #Login_container {
+    @include positionProperties(absolute, 50%, '0', 50%, '0');
+    transform: translate(-50%, -50%);
+    width: 50%;
+    border-radius: 20px;
+    background-color: $dim_black;
+    text-align: center;
+    box-shadow: 5px 5px 10px black;
+    padding: 20px;
+
+    #Login_header {
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+
+    #Login_button_wrapper {
+      position: relative;
+      button {
+        width: 50%;
+        padding: 10px;
+        cursor: pointer;
+        // border: none;
+        border-radius: 10px;
+        background-color: $dim_white;
+        color: black;
+        @include transitionProperties(all, .2s);
+
+        &:hover {
+          background-color: $theme;
+          color: white;
+        }
+      }
+    }
+  }
 }

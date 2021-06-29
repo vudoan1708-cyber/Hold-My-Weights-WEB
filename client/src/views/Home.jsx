@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 
-// Handlers
-import { GetUserProfile } from '@/handlers/OAuth/google';
-
-// Logic
-import { randomCharacters } from '@/components/Utils/logic/random';
+// Components
+import Navigation from '@/components/Common/Navigation';
+import EquipmentLists from '@/components/Common/EquipmentLists';
+import ServiceBooking from '@/components/Common/ServiceBooking';
 
 // import {
 //   InvokeCreateService,
@@ -12,38 +11,30 @@ import { randomCharacters } from '@/components/Utils/logic/random';
 //   GetServices,
 // } from '@/handlers/GraphQL/index';
 
-export default function Home() {
-  const [userInfo, setUserInfo] = useState({
-    user_id: '',
-    name: '',
-    email: '',
-    photo: '#',
-    dateOfBirth: '',
-  });
+// SCSS
+import '@/sass/Unique/_Views/_home.scss';
+
+export default function Home(props) {
+  // Props
+  const [user, setUser] = useState(props.userInfo);
 
   useEffect(() => {
-    async function getUserInfo() {
-      const userProfile = await GetUserProfile();
-      const cleanupUserProfile = {
-        user_id: userProfile.sub ? userProfile.sub : randomCharacters(21),
-        name: userProfile.name ? userProfile.name : 'N/A',
-        email: userProfile.email ? userProfile.email : 'No Email Provided',
-        photo: userProfile.picture ? userProfile.picture : '#',
-        dateOfBirth: userProfile.birthdate ? userProfile.birthdate : 'No Birthday Provided',
-      };
-
-      setUserInfo(cleanupUserProfile);
-    }
-    getUserInfo();
-  }, []);
+    setUser(props.userInfo);
+  }, [props.userInfo]);
 
   return (
-    <div className="Home">
-      { JSON.stringify(userInfo, null, 2) }
-      <section>
-        <img alt="user_photo" src={userInfo.photo} />
-      </section>
-      {/* <button onClick={() => ExecuteCreateService(addService, MOCKED_DATA)}>Add A Service</button> */}
-    </div>
+    <>
+      {/* Navigation */}
+      <Navigation userInfo={user} />
+
+      <main role="main" id="Home_wrapper">
+
+        {/* Left Side: Service Booking Card */}
+        <ServiceBooking />
+        {/* Right Side: Equipment Lists */}
+        <EquipmentLists />
+        {/* <button onClick={() => ExecuteCreateService(addService, MOCKED_DATA)}>Add A Service</button> */}
+      </main>
+    </>
   );
 }
