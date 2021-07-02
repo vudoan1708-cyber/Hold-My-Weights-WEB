@@ -1,3 +1,5 @@
-export default function UserAccount() {
-  return '...User Account';
+export default function UserAccount(props) {
+  return (
+    <div>User Account HERE</div>
+  );
 }

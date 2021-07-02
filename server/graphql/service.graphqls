@@ -21,7 +21,9 @@ type Equipment {
   name: String!
   description: String!
   type: String!
+  photo: String!
   dateOfPublish: DateTime
+  barcode: String!
 }
 
 """Booking Times"""
@@ -71,7 +73,9 @@ input EquipmentInput {
   name: String!
   description: String!
   type: String!
+  photo: String!
   dateOfPublish: DateTime
+  barcode: String!
 }
 
 """Input Payload for Booking Times"""

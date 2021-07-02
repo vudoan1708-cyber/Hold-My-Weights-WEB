@@ -1,5 +1,8 @@
+// SCSS
+import '@/sass/Unique/_Common/_service_booking.scss';
+
 export default function ServiceBooking() {
   return (
-    <div>...Service Booking</div>
+    <section id="ServiceBooking_wrapper"></section>
   );
 }

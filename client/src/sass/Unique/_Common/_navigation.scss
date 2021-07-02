@@ -1,5 +1,58 @@
+@import '@/sass/_variables';
+
 #Navigation_wrapper {
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-shadow: 0 0 10px $dim_gray;
+  z-index: 1;
+
+  #Navigation_links_wrapper {
+    position: relative;
+
+    #Navigation_links {
+      list-style: none;
+      display: flex;
+
+      li {
+        margin: 0 10px;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  #Navigation_user_account_wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: gray;
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+    cursor: pointer;
+
+    span {
+      font-size: 30px;
+      margin-right: 20px;
+    }
+
+    img {
+      width: 50%;
+      border-radius: 50%;
+    }
+
+    &:hover {
+      background-color: $dim_gray;
+
+      span {
+        color: $dim_white;
+      }
+    }
+  }
 }

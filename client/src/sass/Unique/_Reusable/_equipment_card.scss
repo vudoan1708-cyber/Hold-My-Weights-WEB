@@ -1,0 +1,20 @@
+@import '@/sass/Mixin/_transition';
+
+.EquipmentCard_wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  @include transitionProperties(box-shadow, .2s);
+
+  .EquipmentCard_imgs {
+    margin-bottom: 10px;
+  }
+
+  &:hover {
+    box-shadow: 5px 5px 10px black;
+  }
+}

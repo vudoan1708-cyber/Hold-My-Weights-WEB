@@ -1,0 +1,36 @@
+{
+  "equipment": [
+    {
+      "name": "Bench Press",
+      "description": "The bench press, or chest press, is an upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench",
+      "type": "Chest",
+      "photo": "#",
+      "dateOfPublish": "",
+      "barcode": ""
+    },
+    {
+      "name": "Seated Leg Curl Machine",
+      "description": "The leg curl, also known as the hamstring curl, is an isolation exercise that targets the hamstring muscles. The exercise involves flexing the lower leg against resistance towards the buttocks",
+      "type": "Legs / Hamstring",
+      "photo": "#",
+      "dateOfPublish": "",
+      "barcode": ""
+    },
+    {
+      "name": "Pull-up Bar",
+      "description": "A pull-up is an upper-body strength exercise. The pull-up is a closed-chain movement where the body is suspended by the hands and pulls up. As this happens, the elbows flex and the shoulders adduct and extend to bring the elbows to the torso",
+      "type": "Back / Outer Lat Area",
+      "photo": "#",
+      "dateOfPublish": "",
+      "barcode": ""
+    },
+    {
+      "name": "Dumbell",
+      "description": "A pull-up is an upper-body strength exercise. The pull-up is a closed-chain movement where the body is suspended by the hands and pulls up. As this happens, the elbows flex and the shoulders adduct and extend to bring the elbows to the torso",
+      "type": "Multi-purpose",
+      "photo": "#",
+      "dateOfPublish": "",
+      "barcode": ""
+    }
+  ]
+}

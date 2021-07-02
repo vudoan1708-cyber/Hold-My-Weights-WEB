@@ -4,6 +4,9 @@ import './sass/Shared/index.scss';
 import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 
+// Store
+import { StoreProvider } from '@/store/index';
+
 // Apollo GraphQL
 import {
   ApolloClient,
@@ -59,7 +62,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <StoreProvider>
+        <App />
+      </StoreProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
