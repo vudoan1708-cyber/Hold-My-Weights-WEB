@@ -9,6 +9,16 @@
   box-shadow: 0 0 10px $dim_gray;
   z-index: 1;
 
+  #Navigation_logo {
+    position: relative;
+    margin-left: 10px;
+    cursor: pointer;
+
+    img {
+      width: 80%;
+    }
+  }
+
   #Navigation_links_wrapper {
     position: relative;
 

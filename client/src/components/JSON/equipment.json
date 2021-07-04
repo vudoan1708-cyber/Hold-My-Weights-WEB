@@ -6,7 +6,20 @@
       "type": "Chest",
       "photo": "#",
       "dateOfPublish": "",
-      "barcode": ""
+      "barcode": "",
+      "bookedTime": [
+        "2:00PM",
+        "2:10PM",
+        "2:20PM",
+        "2:30PM",
+        "3:10PM",
+        "3:20PM",
+        "3:30PM",
+        "3:40PM",
+        "3:50PM",
+        "3:60PM",
+        "4:00PM"
+      ]
     },
     {
       "name": "Seated Leg Curl Machine",
@@ -14,7 +27,20 @@
       "type": "Legs / Hamstring",
       "photo": "#",
       "dateOfPublish": "",
-      "barcode": ""
+      "barcode": "",
+      "bookedTime": [
+        "2:00PM",
+        "2:10PM",
+        "2:20PM",
+        "2:30PM",
+        "3:10PM",
+        "3:20PM",
+        "3:30PM",
+        "3:40PM",
+        "3:50PM",
+        "3:60PM",
+        "4:00PM"
+      ]
     },
     {
       "name": "Pull-up Bar",
@@ -22,7 +48,20 @@
       "type": "Back / Outer Lat Area",
       "photo": "#",
       "dateOfPublish": "",
-      "barcode": ""
+      "barcode": "",
+      "bookedTime": [
+        "2:00PM",
+        "2:10PM",
+        "2:20PM",
+        "2:30PM",
+        "3:10PM",
+        "3:20PM",
+        "3:30PM",
+        "3:40PM",
+        "3:50PM",
+        "3:60PM",
+        "4:00PM"
+      ]
     },
     {
       "name": "Dumbell",
@@ -30,7 +69,20 @@
       "type": "Multi-purpose",
       "photo": "#",
       "dateOfPublish": "",
-      "barcode": ""
+      "barcode": "",
+      "bookedTime": [
+        "2:00PM",
+        "2:10PM",
+        "2:20PM",
+        "2:30PM",
+        "3:10PM",
+        "3:20PM",
+        "3:30PM",
+        "3:40PM",
+        "3:50PM",
+        "3:60PM",
+        "4:00PM"
+      ]
     }
   ]
 }

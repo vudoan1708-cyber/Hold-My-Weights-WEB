@@ -1,0 +1,69 @@
+@import '@/sass/Mixin/_position';
+
+@import '@/sass/_variables';
+
+@mixin buttonStyling($margin, $padding) {
+  margin: $margin;
+  padding: $padding;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+#InfoBox_wrapper {
+  @include positionProperties(absolute, 0, '', 0, '');
+  width: 100%;
+  height: 100%;
+  background-color: $dim_gray;
+
+  #InfoBox_container {
+    @include positionProperties(absolute, 50%, '', 50%, '');
+    transform: translate(-50%, -55%);
+    width: 90%;
+    height: 55%;
+    background-color: white;
+    padding: 20px;
+    border-radius: $radius;
+
+    #InfoBox_booking {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(7, 14.28%);
+      margin: 10px;
+      padding: 5px;
+      background-color: $dim_black;
+      border-radius: 10px;
+      height: 55%;
+      overflow-y: scroll;
+
+      button {
+        @include buttonStyling(10px, 10px);   
+      }
+
+      .bookable {
+        background-color: white;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $dim_white;
+        }
+      }
+
+      .non_bookable {
+        background-color: red;
+        cursor: context-menu;
+      }
+    }
+
+    #InfoBox_finish_btn {
+      position: relative;
+      margin-top: 15px;
+      text-align: right;
+
+      button {
+        background-color: rgb(90, 204, 90);
+        @include buttonStyling(0, 15px);
+      }
+    }
+  }
+}

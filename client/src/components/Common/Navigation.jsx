@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 // SCSS
 import '@/sass/Unique/_Common/_navigation.scss';
 
+// Assets
+import HoldMyWeightsIcon from '@/assets/icons/hmw.png';
+
 export default function Navigation(props) {
   // Props
   const [user, setUser] = useState(props.userInfo);
@@ -11,12 +14,22 @@ export default function Navigation(props) {
     setUser(props.userInfo);
   }, [props.userInfo]);
 
+  // Redirect TO Homepage Via Clicking on The App Icon
+  function reloadPage() {
+    window.location.reload();
+  }
+
+  function showUserSettings() {
+
+  }
+
   return (
     <article id="Navigation_wrapper">
 
       {/* Logo */}
-      <section>
-        <img alt="Hold My Weights Logo" src="#" />
+      <section aria-roledescription="app_icon"
+        id="Navigation_logo" onClick={reloadPage}>
+        <img alt="Hold My Weights Logo" src={HoldMyWeightsIcon} />
       </section>
 
       {/* Links */}
@@ -28,7 +41,8 @@ export default function Navigation(props) {
       </nav>
 
       {/* User Account */}
-      <section aria-roledescription="account_setting" id="Navigation_user_account_wrapper">
+      <section aria-roledescription="account_setting"
+        id="Navigation_user_account_wrapper" onClick={showUserSettings}>
         <img alt="user_google_avatar" src={user.photo} />
         <span>
           &#x02207;

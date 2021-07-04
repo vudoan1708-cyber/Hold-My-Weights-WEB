@@ -16,12 +16,12 @@ export default function EquipmentCard(props) {
     setEquipment(props.equipment);
   }, [props.equipment]);
 
-  function infoBox() {
+  function showInfoBox() {
     setSelectedEquipment(equipment);
   }
 
   return (
-    <section className="EquipmentCard_wrapper" onClick={infoBox}>
+    <section className="EquipmentCard_wrapper" onClick={showInfoBox}>
       {/* Equipment Photo */}
       <img className="EquipmentCard_imgs" alt={equipment.name} src={equipment.photo} />
       {/* Header and Description */}
