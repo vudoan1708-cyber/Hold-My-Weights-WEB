@@ -18,7 +18,7 @@ const compression = require('compression');
 const loginRouter = require('./routes/login');
 const callbackRouter = require('./routes/callback');
 const googleRouter = require('./routes/google');
-const databaseRouter = require('./routes/database');
+// const databaseRouter = require('./routes/database');
 
 const root = path.join(__dirname, './dist');
 const port = process.env.PORT || 5000;
@@ -60,7 +60,7 @@ app.use(cors());
 loginRouter(app);
 callbackRouter(app);
 googleRouter(app);
-databaseRouter(app);
+// databaseRouter(app);
 
 // check if the app is running in production
 if (process.env.NODE_ENV === 'production') {

@@ -6,7 +6,7 @@
       "type": "Chest",
       "photo": "#",
       "dateOfPublish": "",
-      "barcode": "",
+      "barcode": "#",
       "bookedTime": [
         "2:00PM",
         "2:10PM",
@@ -27,7 +27,7 @@
       "type": "Legs / Hamstring",
       "photo": "#",
       "dateOfPublish": "",
-      "barcode": "",
+      "barcode": "#",
       "bookedTime": [
         "2:00PM",
         "2:10PM",
@@ -48,7 +48,7 @@
       "type": "Back / Outer Lat Area",
       "photo": "#",
       "dateOfPublish": "",
-      "barcode": "",
+      "barcode": "#",
       "bookedTime": [
         "2:00PM",
         "2:10PM",
@@ -69,7 +69,7 @@
       "type": "Multi-purpose",
       "photo": "#",
       "dateOfPublish": "",
-      "barcode": "",
+      "barcode": "#",
       "bookedTime": [
         "2:00PM",
         "2:10PM",

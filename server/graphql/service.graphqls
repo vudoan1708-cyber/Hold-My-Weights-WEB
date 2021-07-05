@@ -24,6 +24,7 @@ type Equipment {
   photo: String!
   dateOfPublish: DateTime
   barcode: String!
+  bookedTime: [String!]!
 }
 
 """Booking Times"""
@@ -76,6 +77,7 @@ input EquipmentInput {
   photo: String!
   dateOfPublish: DateTime
   barcode: String!
+  bookedTime: [String!]!
 }
 
 """Input Payload for Booking Times"""
@@ -124,4 +126,5 @@ type Mutation {
 """Subscriptions avialable through this API"""
 type Subscription {
   updateServiceAdded: Service!
+  updateEquipment(id: ID!): Equipment!
 }

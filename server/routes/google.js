@@ -1,4 +1,4 @@
-const getUser = require('../handlers/google/getUser');
+const getUser = require('../internal/handlers/google/getUser');
 
 module.exports = (app) => {
   app.get('/google/user', async(req, res) => {

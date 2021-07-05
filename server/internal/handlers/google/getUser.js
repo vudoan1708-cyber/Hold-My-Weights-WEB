@@ -1,7 +1,7 @@
 const {
   useFetch,
   useFetchWithAuthorisation,
-} = require('../../internal/logic/useFetch');
+} = require('../../logic/useFetch');
 
 module.exports = async function getUser(TOKEN) {
   const OPENID_BASE_URL = 'https://accounts.google.com/.well-known/openid-configuration';

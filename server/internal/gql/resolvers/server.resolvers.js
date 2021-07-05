@@ -1,16 +1,19 @@
+// Configure the connection to MongoDB
+const createConnection = require('../../handlers/mongodb/connection/index');
+createConnection();
+
+// MongoDB Database Logic
+const createData = require('../../handlers/mongodb/logic/createData');
+const getAllData = require('../../handlers/mongodb/logic/getAllData');
+
 // Top-Level Resolver
 const Resolver = require('./index');
-
-// Array
-// const { sortArray } = require('../../logic/array');
-
-// // Binary Search Algorithm
-// const binarySearch = require('../../logic/algorithm/binarySearch');
 
 // Instantiate The Resolver Class To Instantiate Models
 // And Use Them In This File
 const resolver = new Resolver();
 
+// GraphQL Resolvers
 module.exports = resolvers = {
   Query: {
     node: (_, args) => {
@@ -25,6 +28,8 @@ module.exports = resolvers = {
           services.push(service);
         });
       }
+      // Find All Data from MongoDB Database
+      getAllData();
 
       return services;
     },
@@ -41,8 +46,10 @@ module.exports = resolvers = {
       const newService = resolver.serviceFactory.NewService(args.input);
       // Add The Newly Created Service To The Array Stored in The Resolvers
       resolver.services.push(newService);
-      // Publish The Event 'SERVICE_CREATED' to allow live update Using Subscription
+      // Publish The Event 'SERVICE_CREATED' to allow live update Using Subscription (Creating A Service)
       pubsub.publish('SERVICE_CREATED', { updateServiceAdded: newService });
+      // Insert Data to MongoDB Database
+      createData(newService);
       // Return The Newly Created Service
       return newService;
     },
@@ -91,9 +98,11 @@ module.exports = resolvers = {
     },
 
     // Booked Equipment Info
-    editEquipment: (_, args) => {
+    editEquipment: (_, args, { pubsub }) => {
       const chosenService = resolver.services[args.id - 1];
       chosenService.EditEquipment(args.input.booked, args.input.time);
+      // Publish The Event 'EQUIPMENT_EDITTED' to allow live update Using Subscription (Editting Booked Equipment)
+      pubsub.publish('EQUIPMENT_EDITTED', { updateServiceAdded: newService });
       return chosenService.Get();
     },
 
@@ -117,6 +126,9 @@ module.exports = resolvers = {
   Subscription: {
     updateServiceAdded: {
       subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('SERVICE_CREATED'),
+    },
+    updateEquipment: {
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('EQUIPMENT_EDITTED'),
     },
   }
 };

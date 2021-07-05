@@ -50,8 +50,12 @@
       }
 
       .non_bookable {
-        background-color: red;
+        background-color: $dim_gray;
         cursor: context-menu;
+      }
+
+      .booked {
+        background-color: $selected;
       }
     }
 
@@ -61,7 +65,7 @@
       text-align: right;
 
       button {
-        background-color: rgb(90, 204, 90);
+        background-color: $selected;
         @include buttonStyling(0, 15px);
       }
     }

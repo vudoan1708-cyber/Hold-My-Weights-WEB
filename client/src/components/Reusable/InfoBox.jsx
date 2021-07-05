@@ -28,6 +28,7 @@ export default function InfoBox(props) {
   }
 
   useEffect(() => {
+    setFilteredTime([]);
     function filterBookedTime() {
       for (let time of Time.bookingTime) {
         for (let i = 0; i < selectedEquipment.bookedTime.length; i += 1) {
@@ -52,8 +53,25 @@ export default function InfoBox(props) {
     filterBookedTime();
   }, [selectedEquipment]);
 
+  function bookTime(index) {
+    // Make a shallow copy of the items
+    let items = [...filteredTime];
+    // Mutate an element of the copy
+    let item = {
+      ...items[index],
+      classifiedName: filteredTime[index].classifiedName === 'bookable' ? 'booked' : 'bookable',
+    }
+    // Put it back into the copied array. N.B. we *are* mutating the array here, but that's why we made a copy first
+    items[index] = item;
+    // Set the state to the new copy
+    setFilteredTime(items);
+    // Make The clones Undefined so that they will be collected by garbage collection (reduce space complexity)
+    items = undefined;
+    item = undefined;
+  }
+
   return (
-    <section id="InfoBox_wrapper" onClick={ closeInfoBox }>
+    <section id="InfoBox_wrapper" onClick={closeInfoBox}>
       <section id="InfoBox_container" ref={infoBoxRef}>
         {/* Headers */}
         <header>
@@ -66,7 +84,12 @@ export default function InfoBox(props) {
         {/* Booked Time */}
         <section id="InfoBox_booking">
           { filteredTime ? filteredTime.map((obj, index) =>
-            <button key={index} className={obj.classifiedName}>
+            <button key={index}
+                    onClick={() =>
+                      obj.classifiedName === 'bookable' || obj.classifiedName === 'booked'
+                        ? bookTime(index)
+                        : undefined}
+                    className={obj.classifiedName}>
               {obj.time}
             </button>) : null }
         </section>
