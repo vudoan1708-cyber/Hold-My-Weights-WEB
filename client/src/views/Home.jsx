@@ -32,7 +32,7 @@ export default function Home(props) {
         {/* Left Side: Service Booking Card */}
         <ServiceBooking />
         {/* Right Side: Equipment Lists */}
-        <EquipmentLists />
+        <EquipmentLists userInfo={user} />
         {/* <button onClick={() => ExecuteCreateService(addService, MOCKED_DATA)}>Add A Service</button> */}
       </main>
     </>

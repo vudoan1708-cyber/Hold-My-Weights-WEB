@@ -2,10 +2,6 @@
 const createConnection = require('../../handlers/mongodb/connection/index');
 createConnection();
 
-// MongoDB Database Logic
-const createData = require('../../handlers/mongodb/logic/createData');
-const getAllData = require('../../handlers/mongodb/logic/getAllData');
-
 // Top-Level Resolver
 const Resolver = require('./index');
 
@@ -20,22 +16,35 @@ module.exports = resolvers = {
       return resolver.services[args.id - 1].GetID();
     },
 
-    getServices: () => {
-      const services = [];
-      if (resolver.services.length > 0) {
-        // Loop Through The Array of Services from The Resolvers
-        resolver.services.forEach((service) => {
-          services.push(service);
-        });
-      }
+    getServicesFromDatabase: async () => {
       // Find All Data from MongoDB Database
-      getAllData();
+      let savedServices = await resolver.LoadServices();
+      if (savedServices) {
+        savedServices.forEach((service) => {
+          // Instantiate New Service Models Through The Service Factory Model
+          const newService = resolver.serviceFactory.NewService(service);
+          // Add The Newly Created Service To The Array Stored in The Resolvers
+          resolver.services.push(newService);
+        });
+      } else savedServices = [];
 
-      return services;
+      return savedServices;
+    },
+
+    getServices: async () => {
+      return resolver.services;
     },
 
     getService: (_, args) => {
       return resolver.services[args.id - 1].Get();
+    },
+
+    getEquipmentLists: async () => {
+      // Find All Data from MongoDB Database
+      const existingEquipment = await resolver.LoadEquipmentLists();
+      // console.log(JSON.stringify(existingEquipment, null, 2));
+      console.log(existingEquipment[1].name);
+      return existingEquipment ? existingEquipment : [];
     }
   },
 
@@ -49,7 +58,7 @@ module.exports = resolvers = {
       // Publish The Event 'SERVICE_CREATED' to allow live update Using Subscription (Creating A Service)
       pubsub.publish('SERVICE_CREATED', { updateServiceAdded: newService });
       // Insert Data to MongoDB Database
-      createData(newService);
+      resolver.CreateService(newService);
       // Return The Newly Created Service
       return newService;
     },
@@ -102,11 +111,11 @@ module.exports = resolvers = {
       const chosenService = resolver.services[args.id - 1];
       chosenService.EditEquipment(args.input.booked, args.input.time);
       // Publish The Event 'EQUIPMENT_EDITTED' to allow live update Using Subscription (Editting Booked Equipment)
-      pubsub.publish('EQUIPMENT_EDITTED', { updateServiceAdded: newService });
+      pubsub.publish('EQUIPMENT_EDITTED', { updateEquipment: chosenService });
       return chosenService.Get();
     },
 
-    editMultipleFields: (_, args) => {
+    editMultipleFields: (_, args, { pubsub }) => {
       const options = args.options;
       const inputs = args.input;
       const chosenService = resolver.services[args.id - 1];
@@ -118,7 +127,9 @@ module.exports = resolvers = {
         } else if (option === 'equipment') {
           chosenService.EditMultipleFields(null, inputs.equipment.booked, inputs.equipment.time);
         }
-      })
+      });
+      // Publish The Event 'EQUIPMENT_EDITTED' to allow live update Using Subscription (Editting Booked Equipment)
+      pubsub.publish('EQUIPMENT_EDITTED', { updateEquipment: chosenService });
       return chosenService.Get();
     },
   },

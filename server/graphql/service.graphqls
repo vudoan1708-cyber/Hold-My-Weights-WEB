@@ -53,10 +53,14 @@ type Query {
     """The ID of the object"""
     id: ID!
   ): Node
-  """Get All The Services You Have Booked Historically"""
+  """Get All The Services You Have Booked During System's Runtime"""
   getServices: [Service!]!
+  """Get All The Services You Have Booked Historically"""
+  getServicesFromDatabase: [Service!]!
   """Get A Particular Service"""
   getService(id: ID!): Service!
+  """"Get Existing Equipment Info"""
+  getEquipmentLists: [Equipment!]!
 }
 
 """Input Payload for Creating a User Object"""

@@ -5,7 +5,7 @@
       "description": "The bench press, or chest press, is an upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench",
       "type": "Chest",
       "photo": "#",
-      "dateOfPublish": "",
+      "dateOfPublish": "No Info",
       "barcode": "#",
       "bookedTime": [
         "2:00PM",
@@ -26,7 +26,7 @@
       "description": "The leg curl, also known as the hamstring curl, is an isolation exercise that targets the hamstring muscles. The exercise involves flexing the lower leg against resistance towards the buttocks",
       "type": "Legs / Hamstring",
       "photo": "#",
-      "dateOfPublish": "",
+      "dateOfPublish": "No Info",
       "barcode": "#",
       "bookedTime": [
         "2:00PM",
@@ -47,7 +47,7 @@
       "description": "A pull-up is an upper-body strength exercise. The pull-up is a closed-chain movement where the body is suspended by the hands and pulls up. As this happens, the elbows flex and the shoulders adduct and extend to bring the elbows to the torso",
       "type": "Back / Outer Lat Area",
       "photo": "#",
-      "dateOfPublish": "",
+      "dateOfPublish": "No Info",
       "barcode": "#",
       "bookedTime": [
         "2:00PM",
@@ -68,7 +68,28 @@
       "description": "A pull-up is an upper-body strength exercise. The pull-up is a closed-chain movement where the body is suspended by the hands and pulls up. As this happens, the elbows flex and the shoulders adduct and extend to bring the elbows to the torso",
       "type": "Multi-purpose",
       "photo": "#",
-      "dateOfPublish": "",
+      "dateOfPublish": "No Info",
+      "barcode": "#",
+      "bookedTime": [
+        "2:00PM",
+        "2:10PM",
+        "2:20PM",
+        "2:30PM",
+        "3:10PM",
+        "3:20PM",
+        "3:30PM",
+        "3:40PM",
+        "3:50PM",
+        "3:60PM",
+        "4:00PM"
+      ]
+    },
+    {
+      "name": "Leg Press Machine",
+      "description": "The leg press is a compound weight training exercise in which the individual pushes a weight or resistance away from them using their legs. The term leg press machine refers to the apparatus used to perform this exercise.",
+      "type": "Legs",
+      "photo": "#",
+      "dateOfPublish": "No Info",
       "barcode": "#",
       "bookedTime": [
         "2:00PM",

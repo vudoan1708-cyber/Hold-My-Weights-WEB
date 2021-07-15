@@ -1,5 +1,8 @@
 import { useRef, useContext, useState, useEffect } from 'react';
 
+// GraphQL handlers
+import { InvokeCreateService, ExecuteCreateService } from '@/handlers/GraphQL/index';
+
 // JSON
 import Time from '@/components/JSON/time.json';
 
@@ -10,6 +13,8 @@ import { ServiceContext } from '@/store/index';
 import '@/sass/Unique/_Reusable/_infobox.scss';
 
 export default function InfoBox(props) {
+  // Instantiate create service function
+  const createService = InvokeCreateService();
   // DOM Ref
   const infoBoxRef = useRef(null);
 
@@ -21,10 +26,35 @@ export default function InfoBox(props) {
   // Close Info Box
   function closeInfoBox(e) {
     // If a Click Event is Registered Outside The InfoBox Container
-    if (!infoBoxRef.current.contains(e.target)) {
-      // Close The Info Box
-      setSelectedEquipment({});
-    }
+    if (e)
+      if (!infoBoxRef.current.contains(e.target)) {
+        // Close The Info Box
+        setSelectedEquipment({});
+      }
+  }
+
+  // Book A Service
+  function bookService() {
+    const times = [];
+    filteredTime.forEach((timeObj) => {
+      // eslint-disable-next-line no-unused-expressions
+      timeObj.classifiedName === 'booked' ? times.push(timeObj.time) : undefined;
+    });
+
+    const input = {
+      user: props.userInfo,
+      equipment: {
+        booked: [selectedEquipment],
+        time: {
+          expected_time: times,
+        },
+      },
+    };
+
+    ExecuteCreateService(createService, input);
+
+    // Close The Info Box
+    setSelectedEquipment({});
   }
 
   useEffect(() => {
@@ -96,7 +126,7 @@ export default function InfoBox(props) {
 
         {/* Book Button */}
         <section id="InfoBox_finish_btn">
-          <button>Book</button>
+          <button onClick={ bookService }>Book</button>
         </section>
       </section>
     </section>

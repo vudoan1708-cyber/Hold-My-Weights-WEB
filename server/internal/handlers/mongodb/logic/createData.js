@@ -1,8 +1,6 @@
-const { Service } = require('../model');
-
-module.exports = (data) => {
+module.exports = (Collection, data) => {
   try {
-    const serviceModel = new Service(data);
+    const serviceModel = new Collection(data);
 
     serviceModel.save((err, doc) => {
       if (err) return console.error(err);

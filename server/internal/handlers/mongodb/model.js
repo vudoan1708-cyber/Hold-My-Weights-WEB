@@ -12,6 +12,17 @@ const requiredArrayString = {
   required: true,
 }
 
+// EQUIPMENT Schema
+const equipmentSchema = new Schema({
+  name: requiredString,
+  description: requiredString,
+  type: requiredString,
+  photo: requiredString,
+  dateOfPublish: String,
+  barcode: requiredString,
+  bookedTime: requiredArrayString,
+})
+// SERVICE Schema
 const serviceSchema = new Schema({
   id: String || Int16Array,
   user: {
@@ -41,3 +52,4 @@ const serviceSchema = new Schema({
 });
 
 module.exports.Service = model('SERVICE', serviceSchema, 'user_service');
+module.exports.EquipmentLists = model('EQUIPMENT', equipmentSchema, 'equipment_lists');

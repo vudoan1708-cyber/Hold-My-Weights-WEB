@@ -1,12 +1,13 @@
-const { Service } = require('../model');
-
-module.exports = () => {
+module.exports = async(Collection) => {
+  let response = null;
   try {
-    Service.find((err, doc) => {
-      if (err) return console.error(err);
-      return console.log(`Document found succussfully! ${doc}`);
+    await Collection.find({}, (err, doc) => {
+      if (err) response = err;
+      response = doc;
     });
   } catch (err) {
-    return console.error(`Error: ${err}`);
+    response = err;
   }
+
+  return response;
 }

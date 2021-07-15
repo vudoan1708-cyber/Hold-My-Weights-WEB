@@ -1,10 +1,12 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 // Context from Store
 import { ServiceContext } from '@/store/index';
 
 // JSON
-import Equipment from '@/components/JSON/equipment.json';
+// import Equipment from '@/components/JSON/equipment.json';
+// Database
+import { GetEquipmentLists } from '@/handlers/GraphQL/index';
 
 // Logic
 import { isCharactersFromString } from '@/components/Utils/logic/string';
@@ -18,14 +20,11 @@ import InfoBox from '@/components/Reusable/InfoBox';
 // SCSS
 import '@/sass/Unique/_Common/_equipment_lists.scss';
 
-function parseEquipmentInfo(equipment) {
-  return equipment;
-}
+export default function EquipmentLists(props) {
+  const { loading, error, data } = GetEquipmentLists();
+  const [equipment, setEquipment] = useState(null);
 
-export default function EquipmentLists() {
-  const [equipment] = useState(() => parseEquipmentInfo(Equipment.equipment));
-
-  const [proxyEquipmentList, setProxyEquipmentList] = useState(() => parseEquipmentInfo(equipment));
+  const [proxyEquipmentList, setProxyEquipmentList] = useState(equipment);
 
   const [selectedEquipment] = useContext(ServiceContext);
 
@@ -45,23 +44,36 @@ export default function EquipmentLists() {
     if (e.target.value === '') setProxyEquipmentList(equipment);
   }
 
-  return (
-    <section id="EquipmentLists_wrapper">
-      {/* Search Area */}
-      <section id="EquipmentLists_search">
-        <input
-          type="text"
-          placeholder="Search for Equipment Item..."
-          onChange={handleChangeInput} />
-      </section>
+  useEffect(() => {
+    if (data) {
+      console.log(data.getEquipmentLists);
+      setEquipment(data.getEquipmentLists);
+      setProxyEquipmentList(data.getEquipmentLists);
+    }
+  }, [data]);
 
-      {/* Equipment Cards */}
-      <section id="EquipmentLists_equipment_card">
-        { proxyEquipmentList.map((e, i) => <EquipmentCard equipment={e} key={i} />) }
-      </section>
+  if (loading) return <aside>...Loading</aside>;
+  if (error) return <aside>Error while loading data!!!</aside>;
 
-      {/* Info Box */}
-      { (!isEmpty(selectedEquipment)) ? <InfoBox equipment={selectedEquipment} /> : null }
-    </section>
-  );
+  if (data && proxyEquipmentList) {
+    return (
+      <section id="EquipmentLists_wrapper">
+        {/* Search Area */}
+        <section id="EquipmentLists_search">
+          <input
+            type="text"
+            placeholder="Search for Equipment Item..."
+            onChange={handleChangeInput} />
+        </section>
+  
+        {/* Equipment Cards */}
+        <section id="EquipmentLists_equipment_card">
+          { proxyEquipmentList.map((e, i) => <EquipmentCard equipment={e} key={i} />) }
+        </section>
+  
+        {/* Info Box */}
+        { (!isEmpty(selectedEquipment)) ? <InfoBox userInfo={props.userInfo} equipment={selectedEquipment} /> : null }
+      </section>
+    );
+  } else return <aside>Wait for data...</aside>
 }
