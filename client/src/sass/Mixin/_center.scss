@@ -1,0 +1,17 @@
+@import '../variables';
+
+@mixin centerComponent($direction) {
+  position: absolute;
+
+  @if $direction == horizontal {
+    left: $center;
+    transform: translateX(-$center);
+  } @else if $direction == vertical {
+    top: $center;
+    transform: translateY(-$center);
+  } @else {
+    left: $center;
+    top: $center;
+    transform: translate(-$center, -$center);
+  }
+}

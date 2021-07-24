@@ -1,0 +1,6 @@
+@mixin backgroundTheme($color, $url) {
+  background-color: $color;
+  background-image: url($url);
+  background-attachment: fixed;
+  background-size: cover;
+}

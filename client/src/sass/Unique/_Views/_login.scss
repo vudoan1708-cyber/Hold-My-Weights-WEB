@@ -2,6 +2,7 @@
 
 @import '@/sass/Mixin/_position';
 @import '@/sass/Mixin/_transition';
+@import '@/sass/Mixin/_background';
 
 #Login_wrapper {
   display: flex;
@@ -10,8 +11,8 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: $theme;
   color: white;
+  @include backgroundTheme($theme, $img_theme_cover_url);
 
   #Login_container {
     @include positionProperties(absolute, 50%, '0', 50%, '0');

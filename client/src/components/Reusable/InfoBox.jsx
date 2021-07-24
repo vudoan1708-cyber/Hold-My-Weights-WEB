@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useRef, useContext, useState, useEffect } from 'react';
 
 // GraphQL handlers
@@ -20,8 +21,10 @@ export default function InfoBox(props) {
 
   const [filteredTime, setFilteredTime] = useState([]);
 
-  // eslint-disable-next-line no-unused-vars
-  const [selectedEquipment, setSelectedEquipment] = useContext(ServiceContext);
+  // Get Store Context
+  const { selectedEquipmentInStore, equipmentListInStore } = useContext(ServiceContext);
+  const [selectedEquipment, setSelectedEquipment] = selectedEquipmentInStore;
+  const [_, setEquipmentList] = equipmentListInStore;
 
   // Close Info Box
   function closeInfoBox(e) {
@@ -41,20 +44,27 @@ export default function InfoBox(props) {
       timeObj.classifiedName === 'booked' ? times.push(timeObj.time) : undefined;
     });
 
+    const equipmentInput = {
+      booked: [selectedEquipment],
+      time: {
+        expected_time: times,
+        finishing_time: [],
+      },
+    }
+
     const input = {
       user: props.userInfo,
-      equipment: {
-        booked: [selectedEquipment],
-        time: {
-          expected_time: times,
-        },
-      },
+      equipment: equipmentInput,
     };
 
+    // Create A Service and Stored it in The Database
     ExecuteCreateService(createService, input);
 
     // Close The Info Box
     setSelectedEquipment({});
+
+    // Add The Service to the Equipment Lists from store
+    setEquipmentList((list) => [...list, { equipment: equipmentInput }]);
   }
 
   useEffect(() => {

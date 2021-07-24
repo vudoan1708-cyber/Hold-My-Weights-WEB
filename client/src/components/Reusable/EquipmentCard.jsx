@@ -9,8 +9,9 @@ import '@/sass/Unique/_Reusable/_equipment_card.scss';
 export default function EquipmentCard(props) {
   const [equipment, setEquipment] = useState(props.equipment);
 
+  const { selectedEquipmentInStore } = useContext(ServiceContext);
   // eslint-disable-next-line no-unused-vars
-  const [_, setSelectedEquipment] = useContext(ServiceContext);
+  const [_, setSelectedEquipment] = selectedEquipmentInStore;
 
   useEffect(() => {
     setEquipment(props.equipment);

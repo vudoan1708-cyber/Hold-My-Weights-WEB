@@ -1,4 +1,5 @@
 @import '@/sass/Mixin/_position';
+@import '@/sass/Mixin/_center';
 
 @import '@/sass/_variables';
 
@@ -17,8 +18,7 @@
   background-color: $dim_gray;
 
   #InfoBox_container {
-    @include positionProperties(absolute, 50%, '', 50%, '');
-    transform: translate(-50%, -55%);
+    @include centerComponent(both);
     width: 90%;
     height: 55%;
     background-color: white;

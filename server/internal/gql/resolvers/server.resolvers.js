@@ -42,8 +42,6 @@ module.exports = resolvers = {
     getEquipmentLists: async () => {
       // Find All Data from MongoDB Database
       const existingEquipment = await resolver.LoadEquipmentLists();
-      // console.log(JSON.stringify(existingEquipment, null, 2));
-      console.log(existingEquipment[1].name);
       return existingEquipment ? existingEquipment : [];
     }
   },

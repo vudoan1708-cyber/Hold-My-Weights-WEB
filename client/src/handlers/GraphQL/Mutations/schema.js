@@ -13,6 +13,7 @@ export const CREATE_SERVICE = gql`
       user_id,
       name,
       email,
+      photo,
       dateOfBirth
     },
     equipment {
@@ -20,7 +21,10 @@ export const CREATE_SERVICE = gql`
         name,
         description,
         type,
+        photo,
         dateOfPublish,
+        barcode,
+        bookedTime,
       },
       time {
         expected_time,
@@ -39,6 +43,7 @@ export const DELETE_SERVICE = gql`
         user_id,
         name,
         email,
+        photo,
         dateOfBirth
       },
       equipment {
@@ -46,7 +51,10 @@ export const DELETE_SERVICE = gql`
           name,
           description,
           type,
+          photo,
           dateOfPublish,
+          barcode,
+          bookedTime,
         },
         time {
           expected_time,

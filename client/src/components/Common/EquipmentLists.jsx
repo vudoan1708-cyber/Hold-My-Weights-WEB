@@ -26,7 +26,8 @@ export default function EquipmentLists(props) {
 
   const [proxyEquipmentList, setProxyEquipmentList] = useState(equipment);
 
-  const [selectedEquipment] = useContext(ServiceContext);
+  const { selectedEquipmentInStore } = useContext(ServiceContext);
+  const [selectedEquipment] = selectedEquipmentInStore;
 
   function handleChangeInput(e) {
     // Empty The List First
@@ -46,9 +47,17 @@ export default function EquipmentLists(props) {
 
   useEffect(() => {
     if (data) {
-      console.log(data.getEquipmentLists);
-      setEquipment(data.getEquipmentLists);
-      setProxyEquipmentList(data.getEquipmentLists);
+      // Deep copy of data
+      const dataCleaned = JSON.parse(JSON.stringify(data.getEquipmentLists));
+
+      // Strip __typename from data to match the GraphQL Schema
+      delete dataCleaned.__typename;
+      dataCleaned.map((item) => (
+        delete item.__typename
+      ));
+
+      setEquipment(dataCleaned);
+      setProxyEquipmentList(dataCleaned);
     }
   }, [data]);
 

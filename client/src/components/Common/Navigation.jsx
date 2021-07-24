@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 
+// Google Token
+import { TOKEN } from '@/handlers/OAuth/google';
+
 // SCSS
 import '@/sass/Unique/_Common/_navigation.scss';
 
@@ -14,9 +17,14 @@ export default function Navigation(props) {
     setUser(props.userInfo);
   }, [props.userInfo]);
 
-  // Redirect TO Homepage Via Clicking on The App Icon
+  // Redirect to Homepage Via Clicking on The App Icon
   function reloadPage() {
     window.location.reload();
+  }
+
+  // Redirect to Workout Page
+  function workoutPage() {
+    window.location.href = `/#/workout?access_token=${TOKEN}`;
   }
 
   function showUserSettings() {
@@ -36,7 +44,7 @@ export default function Navigation(props) {
       <nav role="navigation" id="Navigation_links_wrapper">
         <ul id="Navigation_links">
           <li><h3>Home</h3></li> |
-          <li><h3>Services</h3></li>
+          <li onClick={workoutPage}><h3>Workout</h3></li>
         </ul>
       </nav>
 
