@@ -8,7 +8,9 @@
   @include backgroundTheme($theme, $img_theme_cover_url);
 
   #BookingBox {
-    @include backgroundTheme($theme, $img_booking_box_cover_url);
+    position: relative;
+    // @include backgroundTheme($theme, $img_booking_box_cover_url);
+    background-color: rgba(128, 128, 128, 0.555);
     width: 50%;
     min-height: 5%;
     border-radius: 15px;
@@ -17,6 +19,15 @@
     text-align: center;
     padding: 10px;
     @include centerComponent(both);
+
+    .BookedEquip {
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.753);
+      padding: 5px;
+      margin: 10px 0;
+      border-radius: 5px;
+      width: 100%;
+    }
   }
 }
 

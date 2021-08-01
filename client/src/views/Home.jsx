@@ -33,7 +33,6 @@ export default function Home(props) {
         <ServiceBooking />
         {/* Right Side: Equipment Lists */}
         <EquipmentLists userInfo={user} />
-        {/* <button onClick={() => ExecuteCreateService(addService, MOCKED_DATA)}>Add A Service</button> */}
       </main>
     </>
   );
