@@ -24,9 +24,7 @@ export default function ServiceBooking() {
   const [equipmentList, setEquipmentList] = equipmentListInStore;
 
   useEffect(() => {
-    console.log(isRendered);
-    if (serviceData && !isRendered) {
-      console.log('THERE');
+    if (serviceData) {
       let equipmentInput = null;
       for (let i = 0; i < serviceData.getServicesFromDatabase.length; i += 1) {
         const service = serviceData.getServicesFromDatabase[i];
@@ -44,8 +42,7 @@ export default function ServiceBooking() {
       // Switch isRendered to true to stop re-rendering this component
       setIsRendered(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [serviceData, setEquipmentList]);
 
   if (serviceDataLoading) return <section>...Loading</section>
   if (serviceDataErr) return <section>...Error while loading data</section>

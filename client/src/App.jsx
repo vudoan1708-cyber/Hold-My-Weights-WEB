@@ -42,7 +42,9 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-        <AllRouters userInfo={userInfo} />
+        {/* Do This Checking to Make Sure There is No Redundant Re-rendering
+        for The Children Components */}
+        {userInfo.user_id !== '' ? <AllRouters userInfo={userInfo} /> : null} 
       </Router>
     </div>
   );
